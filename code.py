@@ -1,6 +1,7 @@
 import cv2
 import pytesseract
 import numpy as np
+import re
 import streamlit as st
 
 st.title("Receipt Checker")
@@ -35,14 +36,23 @@ def categorize_item(item):
 
     return "Other"
 
-test_items = [
-    "Organic Bananas",
-    "Whole Milk (1 gal)",
-    "Bread (Whole Grain)",
-    "Eggs (12 ct)",
-    "Cheddar Cheese",
-    "Lettuce (Head)",
-    "Apples (Honeycrisp)"
+def parse_item(line):
+    # Look for prices at the end of the line
+    match = re.search(r"(.+?)\s+\$?(\d+\.\d{2})$", line)
+
+    if match:
+        item = match.group(1).strip()
+        price = float(match.group(2))
+        return item, price
+
+    return None
+
+test_lines = [
+    "1 Organic Bananas 0.59 0.59",
+    "2 Whole Milk (1 gal) 3.49 6.98",
+    "1 Bread (Whole Grain) 2.99 2.99",
+    "1 Eggs (12 ct) 3.79 3.79",
+    "1 Cheddar Cheese 4.49 4.49",
 ]
 
 total = len(files)
@@ -59,6 +69,10 @@ if submit:
     _, thresh = cv2.threshold(gray, 150, 255, cv2.THRESH_BINARY)
     text = pytesseract.image_to_string(thresh)
     st.write(text)
-  for item in test_items:
-    st.write(item, "→", categorize_item(item))
+    for line in test_lines:
+      result = parse_item(line)
+
+      if result:
+        item, price = result
+        st.write(item, "→", price, "→", categorize_item(item))
   st.write("All Files Scanned")
