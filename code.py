@@ -21,7 +21,7 @@ total = len(files)
 if submit:
   for file in files:
     st.write(f"{x} of {total} scanned.")
-    img = cv2.imread(
+    img = cv2.imdecode(
       np.frombuffer(file.getvalue(), np.uint8),
       cv2.IMREAD_COLOR
     )
