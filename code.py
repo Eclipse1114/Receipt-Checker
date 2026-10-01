@@ -30,3 +30,4 @@ if submit:
     _, thresh = cv2.threshold(gray, 150, 255, cv2.THRESH_BINARY)
     text = pytesseract.image_to_string(thresh)
     st.write(text)
+  st.write("All Files Scanned")
