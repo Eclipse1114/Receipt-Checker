@@ -38,28 +38,46 @@ def categorize_item(item):
 # -----------------------------
 
 def parse_item(line):
+    # Ignore lines that definitely aren't purchases
+    ignored_words = [
+        "subtotal",
+        "tax",
+        "total",
+        "debit",
+        "credit",
+        "cash",
+        "change",
+        "thank you"
+    ]
+
+    lower_line = line.lower()
+
+    for word in ignored_words:
+        if word in lower_line:
+            return None
+
     # Find all prices in the line
     prices = re.findall(r"\$?\d+\.\d{2}", line)
 
-    # If there aren't any prices, this probably isn't an item
     if not prices:
         return None
 
     # The last price should be the item's total
     price = float(prices[-1].replace("$", ""))
 
-    # Remove the prices from the line
+    # Remove prices
     item = re.sub(r"\$?\d+\.\d{2}", "", line).strip()
 
-    # Remove the quantity at the beginning
-    item = re.sub(r"^\d+\s+", "", item)
+    # Remove quantity from beginning
+    # Handles both:
+    # "2 Apples"
+    # "2. Apples"
+    item = re.sub(r"^\d+\.?\s+", "", item)
 
-    # Make sure something is left
     if not item:
         return None
 
     return item, price
-
 
 # -----------------------------
 # Streamlit UI
