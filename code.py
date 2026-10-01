@@ -89,7 +89,7 @@ submit = st.button("Start Extraction")
 
 if submit:
 
-    total = len(files)
+    total = 1
 
     if total == 0:
         st.warning("Please upload at least one receipt.")
