@@ -30,7 +30,7 @@ answers = [
 model.fit(test_data, answers)
 
 test = [
-    "orange",
+    "bear",
     "cheese",
     "Chevy"
 ]
