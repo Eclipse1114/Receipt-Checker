@@ -63,7 +63,7 @@ answers = [
 
 model.fit(test_data, answers)
 
-items = [
+test = [
     "iPhone",
     "monitor",
     "grapes",
@@ -71,9 +71,6 @@ items = [
     "wolf",
     "butter"
 ]
-
-for item in items:
-    print(item, "=", model.predict([item])[0])
 
 for item in test:
     guess = model.predict([item])[0]
