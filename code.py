@@ -29,6 +29,12 @@ answers = [
 
 model.fit(test_data, answers)
 
-for item in test_data:
+test = [
+    "orange",
+    "cheese",
+    "Chevy"
+]
+
+for item in test:
     guess = model.predict([item])[0]
     st.write(f"{item} = {guess}")
