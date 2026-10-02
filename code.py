@@ -54,7 +54,7 @@ answers = [
     "groceries", "groceries", "groceries", "groceries",
 
     # Cars
-    "cars", "cars", "cars", "cars", "cars", "cars",
+    "cars", "cars", "cars", "cars", "cars", "cars", "cars",
 
     # Animals
     "animals", "animals", "animals", "animals",
