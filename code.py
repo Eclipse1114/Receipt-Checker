@@ -6,34 +6,74 @@ from sklearn.svm import SVC
 model = make_pipeline(TfidfVectorizer(), SVC(probability=True))
 
 test_data = [
+    # Technology
     "phone",
     "computer",
+    "tablet",
+    "laptop",
+    "headphones",
+    "keyboard",
+    "mouse",
+
+    # Groceries
     "banana",
-    "Ford",
     "orange",
-    "dog",
+    "apple",
+    "cheese",
+    "milk",
+    "bread",
+    "bacon",
     "tea",
-    "bacon"
+
+    # Cars
+    "Ford",
+    "Chevy",
+    "Toyota",
+    "Honda",
+    "Tesla",
+    "truck",
+    "sedan",
+
+    # Animals
+    "dog",
+    "cat",
+    "bear",
+    "lion",
+    "tiger",
+    "horse",
+    "rabbit"
 ]
 
 answers = [
-    "technology",
-    "technology",
-    "groceries",
-    "cars",
-    "groceries",
-    "animals",
-    "groceries",
-    "groceries"
+    # Technology
+    "technology", "technology", "technology", "technology",
+    "technology", "technology", "technology",
+
+    # Groceries
+    "groceries", "groceries", "groceries", "groceries",
+    "groceries", "groceries", "groceries", "groceries",
+
+    # Cars
+    "cars", "cars", "cars", "cars", "cars", "cars",
+
+    # Animals
+    "animals", "animals", "animals", "animals",
+    "animals", "animals", "animals"
 ]
 
 model.fit(test_data, answers)
 
-test = [
-    "bear",
-    "cheese",
-    "Chevy"
+items = [
+    "iPhone",
+    "monitor",
+    "grapes",
+    "Honda",
+    "wolf",
+    "butter"
 ]
+
+for item in items:
+    print(item, "=", model.predict([item])[0])
 
 for item in test:
     guess = model.predict([item])[0]
