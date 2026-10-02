@@ -31,4 +31,4 @@ model.fit(test_data, answers)
 
 for item in test_data:
     guess = model.predict([item])[0]
-    st.write(f"{item} = {guest}")
+    st.write(f"{item} = {guess}")
